@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from sqlalchemy import engine_from_config, pool
 
 from db.base import Base
+from db.models import Background, Hero, User, UserBackground, UserHero, Vault
 
 load_dotenv()
 

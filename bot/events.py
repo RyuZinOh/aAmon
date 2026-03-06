@@ -1,11 +1,19 @@
+from bot.commands.user import handle_register
+
+COMMANDS = {"register": handle_register}
+
+
 def register_events(bot):
     def get_command(message):
         if bot.user is None:
-            return ""
+            return "", []
         content = message.content
         content = content.replace(f"<@{bot.user.id}>", "")
         content = content.replace(f"<@!{bot.user.id}>", "")
-        return content.strip().lower()
+        parts = content.strip().split()
+        if not parts:
+            return "", []
+        return parts[0].lower(), parts[1:]
 
     @bot.event
     async def on_ready():
@@ -22,8 +30,10 @@ def register_events(bot):
         if not bot.user.mentioned_in(message):
             return
 
-        cmd = get_command(message)
-        if cmd == "test":
-            await message.channel.send("working")
+        cmd, args = get_command(message)
+
+        handler = COMMANDS.get(cmd)
+        if handler:
+            await handler(message, args)
         else:
-            await message.channel.send("error command")
+            await message.channel.send(f"Unknown {cmd}")
