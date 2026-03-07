@@ -1,6 +1,7 @@
+from bot.commands.profile import handle_profile
 from bot.commands.user import handle_register
 
-COMMANDS = {"register": handle_register}
+COMMANDS = {"register": handle_register, "profile": handle_profile}
 
 
 def register_events(bot):

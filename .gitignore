@@ -69,3 +69,5 @@ htmlcov/
 # Temporary files
 *.tmp
 *.swp
+
+/public/
