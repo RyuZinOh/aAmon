@@ -1,0 +1,1 @@
+- ``seed_backgrounds.py`` is used for updating manually the backgounds in the database 
